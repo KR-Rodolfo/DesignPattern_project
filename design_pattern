@@ -2,11 +2,11 @@ from abc import ABC, abstractmethod
 
 # Character 인터페이스
 class Character(ABC):
-    def __init__(self):
-        self.hp = 100
-        self.mp = 100
-        self.attack = 100
-        self.magic = 100
+    def __init__(self, hp, mp, attack, magic):
+        self.hp = hp
+        self.mp = mp
+        self.attack = attack
+        self.magic = magic
 
     @abstractmethod
     def special_skill(self) -> str:
@@ -14,16 +14,25 @@ class Character(ABC):
 
 # Warrior 클래스
 class Warrior(Character):
+    def __init__(self):
+        super().__init__(hp=300, mp=100, attack=15, magic=10)
+    
     def special_skill(self) -> str:
         return "Spinning Slash"
 
 # Mage 클래스
 class Mage(Character):
+    def __init__(self):
+        super().__init__(hp=100, mp=300, attack=10, magic=20)
+    
     def special_skill(self) -> str:
         return "Fireball"
 
 # Assassin 클래스
 class Assassin(Character):
+    def __init__(self):
+        super().__init__(hp=150, mp=150, attack=20, magic=15)
+    
     def special_skill(self) -> str:
         return "Stealth"
 
@@ -65,3 +74,4 @@ client_code(MageFactory())
 # AssassinFactory로 캐릭터 생성
 print("\nCreating an Assassin:")
 client_code(AssassinFactory())
+
