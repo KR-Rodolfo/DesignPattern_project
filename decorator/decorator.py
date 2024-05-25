@@ -1,4 +1,4 @@
-from dessign_pattern import Character, Warrior, Mage, Assassin
+from design_pattern import Character, Warrior, Mage, Assassin
 
 # Decorator 클래스
 class CharacterDecorator(Character):
