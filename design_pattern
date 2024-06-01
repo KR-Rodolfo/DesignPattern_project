@@ -1,0 +1,92 @@
+from abc import ABC, abstractmethod
+
+# Character 인터페이스
+class Character(ABC):
+    def __init__(self, hp, mp, attack, magic):
+        self.hp = hp
+        self.mp = mp
+        self.attack = attack
+        self.magic = magic
+
+    @abstractmethod
+    def special_skill(self) -> str:
+        pass
+
+    @abstractmethod
+    def secondary_skill(self) -> str:
+        pass
+
+# Warrior 클래스
+class Warrior(Character):
+    def __init__(self):
+        super().__init__(hp=300, mp=100, attack=150, magic=100)
+    
+    def special_skill(self) -> str:
+        return "Spinning Slash"
+
+    def secondary_skill(self) -> str:
+        return "Shouting"
+
+# Mage 클래스
+class Mage(Character):
+    def __init__(self):
+        super().__init__(hp=100, mp=300, attack=100, magic=200)
+    
+    def special_skill(self) -> str:
+        return "Fireball"
+
+    def secondary_skill(self) -> str:
+        return "Ice Age"
+
+# Assassin 클래스
+class Assassin(Character):
+    def __init__(self):
+        super().__init__(hp=150, mp=150, attack=200, magic=100)
+    
+    def special_skill(self) -> str:
+        return "Stealth"
+
+    def secondary_skill(self) -> str:
+        return "Critical Strike"
+
+# CharacterFactory 인터페이스
+class CharacterFactory(ABC):
+    @abstractmethod
+    def create_character(self) -> Character:
+        pass
+
+# WarriorFactory 클래스
+class WarriorFactory(CharacterFactory):
+    def create_character(self) -> Character:
+        return Warrior()
+
+# MageFactory 클래스
+class MageFactory(CharacterFactory):
+    def create_character(self) -> Character:
+        return Mage()
+
+# AssassinFactory 클래스
+class AssassinFactory(CharacterFactory):
+    def create_character(self) -> Character:
+        return Assassin()
+
+# 클라이언트 코드
+def client_code(factory: CharacterFactory) -> None:
+    character = factory.create_character()
+    print(f"Character created with HP: {character.hp}, MP: {character.mp}, Attack: {character.attack}, Magic: {character.magic}")
+    print(f"Special Skill: {character.special_skill()}")
+    print(f"Secondary Skill: {character.secondary_skill()}")
+
+# WarriorFactory로 캐릭터 생성
+print("Creating a Warrior:")
+client_code(WarriorFactory())
+
+# MageFactory로 캐릭터 생성
+print("\nCreating a Mage:")
+client_code(MageFactory())
+
+# AssassinFactory로 캐릭터 생성
+print("\nCreating an Assassin:")
+client_code(AssassinFactory())
+
+
